@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+      .photo {
+        width: 150px;
+        height: 150px;
+        border: 2px solid red;
+        background-color: black;
+        border-radius: 50%;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 150px;
+        font-size: 3.5em;
+        color: white;
+        overflow: hidden;
+        position: relative;
+      }
+    </style>
+  </head>
+    <div class="photo">
+      
+      <canvas id="myCanvas" width="150" height="150" style="border: 1px solid black;"></canvas>
+    </div>
+
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var imageObj = new Image();
+
+      imageObj.onload = function() {
+        var longerSide;
+        var sourceX;
+        var sourceY;
+        var sourceWidth;
+        var sourceHeight;
+        
+        if(imageObj.height > imageObj.width) {
+          sourceY = (imageObj.height / 2) - (imageObj.width / 2);
+          sourceX = 0;
+          sourceWidth = imageObj.width;
+          sourceHeight = imageObj.width;
+        }
+        else {
+          sourceX = (imageObj.width / 2) - (imageObj.height / 2);
+          sourceY = 0;
+          sourceWidth = imageObj.height;
+          sourceHeight = imageObj.height;
+        }
+        
+        var destWidth = 150;
+        var destHeight = 150;
+        var destX = 0;
+        var destY = 0;
+
+        context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+      };
+      imageObj.src = 'http://media-cerulean.cursecdn.com/attachments/5/714/mega_ampharos.png';
+      
+    </script>
+
+</html>
